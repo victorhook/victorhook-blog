@@ -8,6 +8,18 @@ class PostSerializer(serializers.ModelSerializer):
         fields = ('id', 'title', 'body', 'timestamp')
 
 
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.PostChange
+        fields = ('id', 'name')
+
+
+class PostTagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.PostChange
+        fields = ('id', 'tag', 'post')
+
+
 class PostChangeSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.PostChange
