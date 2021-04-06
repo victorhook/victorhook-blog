@@ -9,9 +9,14 @@
   {% load static %}
 
   <link href="{% static 'css/base.css' %}" rel="stylesheet">
+  {% block css %}
+    <!-- Custom css -->
+  {% endblock %}
 
 </head>
 <body>
+
+    {{ MEDIA_ROOT }}
 
     <div class="content">
         {% block content %}
@@ -21,5 +26,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <script src="{% static "frontend/main.js" %}"></script>
+    {% block js %}
+      <!-- Custom js -->
+    {% endblock %}
 </body>
 </html>
