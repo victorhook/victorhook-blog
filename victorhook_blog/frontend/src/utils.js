@@ -16,6 +16,14 @@ class Utils {
         return cookieValue;
     }
 
+    static createCsrfToken() {
+        const element = document.createElement('input');
+        element.hidden = true;
+        element.name = 'csrfmiddlewaretoken';
+        element.value = Utils.getCookie('csrftoken');
+        return element;
+    }
+
 };
 
 

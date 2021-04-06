@@ -6,12 +6,16 @@ import {
     Route,
   } from "react-router-dom";
 
-import Navbar from './components/Navbar/Navbar';
-import HomeAdmin from './components/Adminpage/HomeAdmin';
+import Navbar from './components/Navbar';
 import Archive from './components/Archive/Archive';
+import Homepage from './components/Homepage';
 import Aboutpage from './components/Aboutpage';
-import Imagepage from './components/Imagepage/Imagepage';
-import Post from './components/Post/Post';
+import Post from './components/Post';
+
+// Admin only
+import HomeAdmin from './components/Adminpage/HomeAdmin';
+import Imagepage from './components/Adminpage/Imagepage';
+import NewPost from './components/Adminpage/NewPost';
 
 
 const AdminApp = () => {
@@ -23,6 +27,7 @@ const AdminApp = () => {
         <div>
   
           <Navbar links={[
+            {path: '/newpost/', text: 'new post'},
             {path: '/images/', text: 'images'},
             {path: '/archive/', text: 'archive'},
             {path: '/about/', text: 'about'},
@@ -33,13 +38,17 @@ const AdminApp = () => {
             <Route path="/images">
               <Imagepage />
             </Route>
+
+            <Route path="/newpost">
+              <NewPost />
+            </Route>
   
             <Route path="/about/">
                 <Aboutpage />
             </Route>
 
             <Route path="/archive/">
-                <Archive />
+                <Archive isAdmin={true}/>
             </Route>
 
             <Route path="/post/:id/">
@@ -47,7 +56,7 @@ const AdminApp = () => {
             </Route>
 
             <Route path="/">
-              <HomeAdmin />
+              <Homepage />
             </Route>
   
           </Switch>

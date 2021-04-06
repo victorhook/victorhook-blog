@@ -1,14 +1,16 @@
 import React from 'react'
 
 import ArchivePost from './ArchivePost';
+import PostCard from '../PostCard';
 
 
-const Archive = () => {
+const Archive = ({ isAdmin }) => {
 
     const [posts, setPosts] = React.useState([]);
+    const endpoint = isAdmin ? '/api/post_all/' : '/api/post/';
 
     const getPosts = () => {
-        fetch('/api/post')
+        fetch(endpoint)
             .then(res => res.json())
             .then(posts => setPosts(posts));
     }
@@ -16,10 +18,18 @@ const Archive = () => {
     React.useEffect(() => getPosts(), []);
 
     return (
-        <div className="archive">
-            <ul>
-               {posts.map(post => <ArchivePost post={post}/>)}
-            </ul>
+        <div className="archive container-fluid">
+            <div className="row">
+                <ul>
+                {posts.map(post => 
+                        <li>
+                            <PostCard post={post}
+                                      isAdmin={isAdmin}
+                            />
+                        </li>
+                )}
+                </ul>
+            </div>
         </div>
     )
 }

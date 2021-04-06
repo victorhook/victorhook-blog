@@ -7,5 +7,6 @@ urlpatterns = [
     path('archive/', views.index),
     path('about/', views.index),
     path('images/', views.index),
+    path('newpost/', views.index),
     path('post/<int:id>/', views.index),
 ]

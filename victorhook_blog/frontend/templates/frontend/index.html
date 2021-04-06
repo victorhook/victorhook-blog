@@ -1,7 +1,30 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% if user.is_authenticated %}
+
+  {% block css %}
+    <link href="{% static 'css/admin.css' %}" rel="stylesheet">
+  {% endblock %}
+
+{% endif %}
+
 {% block content %}
-  <div id="app">
-    <!-- React will load here -->
-  </div>
+
+  {% if user.is_authenticated %}
+    <div class="d-flex justify-content-end">
+      <a class="logout-button" href="{% url 'logout' %}">logout</a>
+    </div>
+    
+    <div id="admin-app">
+      
+      <!-- React -->
+    </div>
+  {% else %}
+    <div id="app">
+      <!-- React -->
+    </div>
+  {% endif %}
+
 {% endblock %}

@@ -22,12 +22,25 @@ const Homepage = () => {
     React.useEffect(() => getLatestPost(), []);
 
     return (
-        <div>
+        <div className="d-flex justify-content-center homepage">
             
+            <div className="row">
+                <h3 className="offset-2 home-title">the blog of Victor Krook</h3>
+            </div>
+
             {
                 latestPost === null
                 ? <p>No previous blog posts</p>
-                : <PostCard post={latestPost} />
+                : <div className="last-post">
+                    <div className="row">
+                        <h3 className="offset-3">Last post</h3>
+                    </div>
+
+                    <div className="row">
+                        <PostCard post={latestPost} />
+                    </div>
+                 </div>
+                
             }
 
         </div>

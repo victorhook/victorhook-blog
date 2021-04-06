@@ -8,9 +8,9 @@ import {
 
 import Homepage from './components/Homepage';
 import Aboutpage from './components/Aboutpage';
-import Navbar from './components/Navbar/Navbar';
+import Navbar from './components/Navbar';
 import Archive from './components/Archive/Archive';
-import Post from './components/Post/Post';
+import Post from './components/Post';
 
  
 const App = () => {
