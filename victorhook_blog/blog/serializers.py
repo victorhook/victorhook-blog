@@ -5,13 +5,25 @@ from . import models
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Post
-        fields = ('id', 'title', 'body', 'timestamp')
+        fields = ('id', 'title', 'body', 'public', 'timestamp')
 
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.PostChange
         fields = ('id', 'name')
+
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Image
+        fields = ('id', 'name', 'image')
+
+
+class PostImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.PostImage
+        fields = ('id', 'post', 'image')
 
 
 class PostTagSerializer(serializers.ModelSerializer):
