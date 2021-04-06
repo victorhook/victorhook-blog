@@ -10,8 +10,8 @@ class PostSerializer(serializers.ModelSerializer):
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.PostChange
-        fields = ('id', 'name')
+        model = models.Tag
+        fields = ('id', 'name', 'post')
 
 
 class ImageSerializer(serializers.ModelSerializer):
@@ -24,12 +24,6 @@ class PostImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.PostImage
         fields = ('id', 'post', 'image')
-
-
-class PostTagSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.PostChange
-        fields = ('id', 'tag', 'post')
 
 
 class PostChangeSerializer(serializers.ModelSerializer):
