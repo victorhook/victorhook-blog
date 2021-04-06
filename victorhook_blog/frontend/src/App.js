@@ -1,33 +1,41 @@
 import React from "react";
+import { render } from "react-dom";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
-import { render } from "react-dom";
 
 import Homepage from './components/Homepage';
 import Aboutpage from './components/Aboutpage';
 import Navbar from './components/Navbar/Navbar';
 import Archive from './components/Archive/Archive';
+import Post from './components/Post/Post';
 
-
+ 
 const App = () => {
 
   return (
     <Router>
       <div>
 
-        <Navbar />
+        <Navbar links={[
+          {path: '/archive/', text: 'archive'},
+          {path: '/about/', text: 'about'},
+        ]}/>
 
         <Switch>
 
-          <Route path="/about">
+          <Route path="/about/">
             <Aboutpage />
           </Route>
 
-          <Route path="/archive">
+          <Route path="/archive/">
             <Archive />
+          </Route>
+
+          <Route path="/post/:id/">
+            <Post />
           </Route>
 
           <Route path="/">
@@ -44,4 +52,5 @@ const App = () => {
 export default App;
 
 const container = document.getElementById("app");
-render(<App />, container);
+if (container != undefined)
+  render(<App />, container);
