@@ -24,6 +24,13 @@ class Utils {
         return element;
     }
 
+    static getReadMinutes(words) {
+        // WPM taken from https://en.wikipedia.org/wiki/Words_per_minute
+        const WORDS_PER_MINUTE = 180;
+        const minutes = Math.round(words / 180);
+        return minutes === 0 ? 1 : minutes;
+    }
+
 };
 
 

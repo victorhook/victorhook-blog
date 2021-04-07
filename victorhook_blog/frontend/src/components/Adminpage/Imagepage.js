@@ -1,6 +1,8 @@
 import React from 'react'
 import Utils from '../../utils';
 
+import { Eyeglasses } from 'react-bootstrap-icons';
+
 
 // This is special for UPLOADING image, since it's not handled by the
 // normal REST API backend.
@@ -15,6 +17,9 @@ const Imagepage = () => {
     const imageRef = React.useRef(); 
     const [selectedImage, setSelectedImage] = React.useState(null);
     const [images, setImages] = React.useState([]);
+
+    const modalImage = React.useRef();
+    const modalTitle = React.useRef();
 
     /* Callback when pressing upload button. */
     const uploadImage = image => {
@@ -43,7 +48,7 @@ const Imagepage = () => {
                   fetchImages();
               })
         }
-    }
+    } 
 
     const deleteImage = () => {
         if (selectedImage === null) {
@@ -94,25 +99,55 @@ const Imagepage = () => {
     }
 
     return (
-        <div className="imagepage">
-            <h3 className="page-title">Images</h3>
+        <div className="imagepage container-fluid">
 
-            <input type="file" accept="image/*" ref={imageRef}/>
-
-            <button onClick={uploadImage}>Upload</button>
-            <button onClick={deleteImage}>Delete image</button>
+            <div className="row">
+                <h3 className="justify-content-center d-flex page-title">Images</h3>
+            </div>
 
 
-            <div className="image-container">
+            <div className="tools d-flex">
+                <input className="tool file-selector" type="file" accept="image/*" ref={imageRef}/>
+                <button className="tool button" onClick={uploadImage}>Upload</button>
+                <button className="tool button" onClick={deleteImage}>Delete image</button>
+            </div>
+
+
+            <div className="image-container d-flex">
                 {images.map(image => 
-                    <img src={image.image} 
-                         alt={image.name} 
-                         className="img-fluid"
-                         data-id={image.id}
-                         onClick={e => selectImage(e.target, image)}
-                    />
+                    <div className="image-outer">
+                        
+                        <div className="glasses-container">
+                            <Eyeglasses className="glasses"/>
+                        </div>
+
+                        <img src={image.image} 
+                            alt={image.name} 
+                            data-id={image.id}
+                            onClick={e => selectImage(e.target, image)}
+                        />
+                    </div>
                 )}
             </div>
+
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#imageModal">
+            Launch demo modal
+            </button>
+
+            <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" ref={modalTitle} id="imageModalLabel">Image</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img ref={modalImage} class="img-fluid"></img>
+                </div>
+                </div>
+            </div>
+            </div>
+
 
         </div>
     )
