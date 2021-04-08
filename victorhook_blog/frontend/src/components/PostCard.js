@@ -16,31 +16,41 @@ const PostCard = ({ post, isAdmin }) => {
 
     const className = post.public ? 'post-public' : 'post-not-public';
 
+    const bodyRef = React.useRef();
+
+    // If we're admin, we want to go to edit post, otherwise just view it.
+    const ENDPOINT = isAdmin ? 'post_all_raw' : 'post';
+
+    React.useEffect(() => {
+        bodyRef.current.innerHTML = body;
+    }, []);
+
     return (
-        <div className="post-card w-50 m-auto" key={post}>
-            <Link to={`/post/${post.id}/`}>
+        <div className="post-card-container">
+            <div className="post-card" key={post}>
+                <Link to={`/${ENDPOINT}/${post.id}/`}>
 
-                {
-                    isAdmin &&
-                    <p className={`publicity ${className}`}>
-                        {post.public ? 'Public' : 'Not public'}
-                    </p>
-                }
+                    {
+                        isAdmin &&
+                        <p className={`publicity ${className}`}>
+                            {post.public ? 'Public' : 'Not public'}
+                        </p>
+                    }
 
-                <div className="post-top d-flex justify-content-between">
-                    <h3 className="post-title">{ post.title }</h3>
+                    <div className="post-top d-flex justify-content-between">
+                        <h3 className="post-title">{ post.title }</h3>
 
-                    <div>
-                        <h6 className="post-date">Posted: { date }</h6>
-                        <MinutesRead post={post}/>
+                        <div>
+                            <h6 className="post-date">Posted: { date }</h6>
+                            <MinutesRead post={post}/>
+                        </div>
+
                     </div>
-                    
 
-                </div>
-
-
-                <p className="post-body">{ body }</p>
-            </Link>
+                    <div className="post-body readable"
+                         ref={bodyRef}></div>
+                </Link>
+            </div>
         </div>
     )
 }

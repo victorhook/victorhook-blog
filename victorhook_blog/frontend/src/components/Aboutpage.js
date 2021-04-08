@@ -4,10 +4,10 @@ const Aboutpage = () => {
     return (
         <div className="about">
             <div class="row">
-                <h3 className="about-title offset-3 col-6">About the blog</h3>
+                <h3 className="about-title">About the blog</h3>
             </div>
             <div className="row">
-                <p className="readable offset-4 col-4">
+                <p className="readable offset-1 col-10 offset-sm-2 col-sm-8 offset-xl-3 col-xl-6">
                     This is the blog of Victor Krook.
                     I am studying Computer Science and Computer Engineering
                     and this blog aims to explore any kind of topics that I find

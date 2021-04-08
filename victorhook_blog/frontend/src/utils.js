@@ -1,5 +1,8 @@
 class Utils {
 
+    static NO_CONTENT() {return 204};
+    static CREATED() {return 201};
+
     static getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -29,6 +32,24 @@ class Utils {
         const WORDS_PER_MINUTE = 180;
         const minutes = Math.round(words / 180);
         return minutes === 0 ? 1 : minutes;
+    }
+
+    static baseQuery(endpoint, method, body, callback) {
+        fetch(endpoint, {
+            method: method,
+                headers: new Headers({
+                    'X-CSRFToken': Utils.getCookie('csrftoken'),
+                    'Content-type': 'application/json'
+                }),
+                body: JSON.stringify(body)
+        }).then(res => res.status != Utils.NO_CONTENT() ? res.json() : res.status)
+          .catch(err => console.log(`ERROR: ${err}`))
+          .then(res => {
+                if (callback != undefined)
+                    callback(res);
+                else
+                    console.log(res);
+          })
     }
 
 };

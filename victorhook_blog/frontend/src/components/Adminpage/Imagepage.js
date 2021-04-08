@@ -19,7 +19,7 @@ const Imagepage = () => {
     const [images, setImages] = React.useState([]);
 
     const modalImage = React.useRef();
-    const modalTitle = React.useRef();
+    const modalTitle = React.useRef(); 
 
     /* Callback when pressing upload button. */
     const uploadImage = image => {

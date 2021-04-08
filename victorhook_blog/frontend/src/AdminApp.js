@@ -7,7 +7,7 @@ import {
   } from "react-router-dom";
 
 import Navbar from './components/Navbar';
-import Archive from './components/Archive/Archive';
+import Archive from './components/Archive';
 import Homepage from './components/Homepage';
 import Aboutpage from './components/Aboutpage';
 import Post from './components/Post';
@@ -16,6 +16,7 @@ import Post from './components/Post';
 import HomeAdmin from './components/Adminpage/HomeAdmin';
 import Imagepage from './components/Adminpage/Imagepage';
 import NewPost from './components/Adminpage/NewPost';
+import EditPost from './components/Adminpage/EditPost';
 
 
 const AdminApp = () => {
@@ -51,12 +52,16 @@ const AdminApp = () => {
                 <Archive isAdmin={true}/>
             </Route>
 
+            <Route path="/post_all_raw/:id/">
+                <EditPost />
+            </Route>
+
             <Route path="/post/:id/">
-                <Post edit={true}/>
+                <Post />
             </Route>
 
             <Route path="/">
-              <Homepage />
+              <Homepage isAdmin={true}/>
             </Route>
   
           </Switch>
