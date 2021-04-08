@@ -9,6 +9,11 @@ body {
     color:rgb(29, 29, 29);
     font-weight: 400;
     background-color: rgb(250, 251, 255);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-x: hidden;
+    height: 100vh;
 }
 
 a {
@@ -24,7 +29,7 @@ a:hover {
 }
 
 .bg-primary {
-    background-color: #ebe7e7 !important;
+    background-color: #fcd1d1 !important;
 }
 
 .button-container {
@@ -63,8 +68,21 @@ input {
 .readable {
     font-family: 'Montserrat', sans-serif;
     color: rgb(71, 71, 71);
+    word-break: break-all;
+    white-space: normal;
 }
 
+.alert {
+    position: absolute;
+    top: 50px;
+    left: 10%;
+    width: 80%;
+}
+
+footer a, 
+footer p {
+    padding: 0 1em;
+}
 
 /* Minutesread */
 
@@ -104,14 +122,20 @@ input {
 }
 
 /* Post card */
+.post-card-container {
+    perspective: 1000px;
+}
+
 .post-card {
     padding: 3em;
     box-shadow: 0 1em 1em .05em rgb(150, 150, 150);
     transition: 0.3s ease-in-out background-color;
+    transition: transform .3s;
 }
 
 .post-card:hover {
     background-color: #fcd1d1;
+    transform: rotateY(-10deg);
 }
 
 .post-card .post-title,
@@ -123,6 +147,7 @@ input {
 
 .post-card .post-title {
     font-size: 2em;
+    font-weight: 700;
 }
 
 .post-card .post-body {
@@ -133,17 +158,58 @@ input {
 
 /* -- Front page -- */
 .homepage {
-    margin-top: 5em;
-    flex-direction: column;
+    padding-top: 5em;
+    position: relative;
 }
 
 .home-title {
-    font-size: 2em;
+    font-size: 2.5em;
     padding-bottom: 2em;
+    font-weight: 500;
+    text-align: center;
+    transform: scaleY(1.2);
+    letter-spacing: .1em;
 }
 
-.last-post h3 {
-    padding: 1em 0 2em 0;
+.last-post-title {
+    margin: 2em 0;
+}
+
+
+.profile-pic {
+    position: absolute;
+    right: 5em;
+    top: 8em;
+}
+
+.profile-pic img {
+    width: 200px;
+    border-radius: 50%;
+}
+
+
+@media screen and (max-width: 1100px) {
+    .home-title {
+        font-size: 2em;
+    }
+
+    .profile-pic img {
+        width: 150px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .home-title {
+        font-size: 1.5em;
+    }
+    
+    .profile-pic {
+        right: 2em;
+    }
+
+    .profile-pic img {
+        width: 100px;
+    }
 }
 
 
@@ -191,14 +257,17 @@ input {
 
 
 /* -- Post -- */
-.tools .tool,
-.tag-container .dropdown,
-.tag-container input {
-    margin: 0 .5em;
-}
-
 .tools {
     margin-top: 3em;
+}
+
+.tools ul {
+    list-style: none;
+}
+
+.tools li {
+    display: inline-block;
+    padding: .5em;
 }
 
 .post-content {
@@ -209,22 +278,64 @@ input {
     padding: 5em;
 }
 
+/* -- Blogpost -- */
+
+.blogpost {
+    padding: 5em 1em 3em 1em;
+}
+
+.blogpost-header {
+    position: relative;
+    padding: 1.5em;
+    color: black;
+    letter-spacing: .05em;
+}
+
 .blogpost-title {
     text-align: center;
     font-size: 3em;
     margin: 1em;
+    margin: 0;
+}
+
+.blogpost hr {
+    margin-bottom: 100px;
 }
 
 .blogpost-date {
     position: absolute;
-    top: 2em;
-    right: 2em;
+    bottom: 0;
+    right: 1em;
 }
 
 .blogpost-body {
     font-size: 1.3em;
     letter-spacing: .1em;
     line-height: 2em;
+    padding: 1em
+}
+
+.blogpost .blogpost-image {
+    width: 70%;
+    margin: 1em auto;
+    text-align: center;
+    display: block;
+}
+
+.blogpost .blogpost-link {
+    font-weight: 700;
+}
+
+
+
+@media screen and (max-width: 1100px) {
+
+}
+
+@media screen and (max-width: 700px) {
+    .blogpost-title {
+        margin-bottom: .5em;
+    }
 }
 
 
@@ -237,6 +348,7 @@ input {
 .about .about-title {
     margin-bottom: 2em;
     font-size: 2.5em;
+    text-align: center;
 }
 
 .about p {
@@ -296,4 +408,61 @@ input {
     width: 40px;
     height: 40px;
     color: #d7e2ff;
+}
+
+
+/* -- Edit post -- */
+
+.edit-post-content {
+    padding-top: 2em;
+    font-size: 1.1em;
+}
+
+.edit-post-content label {
+    font-weight: 600;
+}
+
+.edit-post-content input,
+.edit-post-content label,
+.edit-post-content textarea {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.edit-post-content input,
+.edit-post-content textarea {
+    margin: 1em 0;
+    padding: 1em;
+}
+
+.edit-post-content input {
+    width: 50%;
+}
+
+/* Images */
+#image-dropdown {
+    height: 700px;
+    width: 800px;
+    background-color: rgb(212, 212, 212);
+    overflow-y: scroll;
+    padding: 1em;
+}
+
+#image-dropdown .image-wrapper:hover {  
+    background-color: rgb(212, 212, 212);
+}
+
+#image-dropdown p {
+    word-break: break-all;
+    white-space: normal;
+}
+
+#image-dropdown .dropdown-item li {
+    width: 350px;
+    padding: 1em;
+}
+
+#image-dropdown .dropdown-item li:hover {
+    background-color: rgb(230, 230, 230);
+    cursor: pointer;
 }

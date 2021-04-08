@@ -13,5 +13,5 @@ urlpatterns = [
     path('api/upload_image/', include('blog.urls')),
     path('', include('frontend.urls')),
     path('*/', include('frontend.urls')),
-    path('post/<int:id>/', include('frontend.urls')),
+    path('*/<int:id>/', include('frontend.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
