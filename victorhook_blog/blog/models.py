@@ -16,6 +16,10 @@ class Tag(models.Model):
     name = models.CharField(max_length=100)
     post = models.ForeignKey('blog.Post', on_delete=models.CASCADE, null=True)
 
+    constraints = [
+        models.UniqueConstraint(fields=['name', 'post'], name='tag-constraint')
+    ]
+
     def __str__(self):
         return self.name
 
