@@ -16,8 +16,6 @@
 </head>
 <body>
 
-    {{ MEDIA_ROOT }}
-
     <div class="content">
         {% block content %}
 
@@ -29,5 +27,16 @@
     {% block js %}
       <!-- Custom js -->
     {% endblock %}
+
+    <footer class="d-flex justify-content-center">
+      <a class="link" href="https://mrhookv.com/contact">contact</a>
+      <p>Victor Krook © <span id="copyright-year"></span></p>
+      <a class="link" href="https://github.com/victorhook/victorhook-blog">github</a>
+    </footer>
+
+    <script>
+      document.getElementById('copyright-year').innerHTML = new Date().getFullYear();
+    </script>
+
 </body>
 </html>
