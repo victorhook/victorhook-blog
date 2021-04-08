@@ -1,4 +1,7 @@
+import json
+from typing import Iterable
 from django.shortcuts import render
+from django.db.models import QuerySet
 from django.http import HttpRequest
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -8,11 +11,29 @@ from . import serializers
 from . import models
 from . import forms
 
+from victorhook_blog.markdown_compiler import compile_markdown
+
+
 
 # -- Default view READONLY permissions -- #
 
-class PostPublicView(viewsets.ModelViewSet):
+class BasePostCompiledView(viewsets.ModelViewSet):
     serializer_class = serializers.PostSerializer
+
+    """ Need to overwrite methods to compile the body first. """
+    def get_queryset(self):
+        posts = super().get_queryset()
+        for post in posts:
+            post.body = compile_markdown(post.body)
+        return posts
+
+    def get_object(self):
+        post = super().get_object()
+        post.body = compile_markdown(post.body)
+        return post
+        
+
+class PostPublicView(BasePostCompiledView):
     queryset = models.Post.objects.filter(public=True)
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
@@ -36,7 +57,11 @@ class TagView(viewsets.ModelViewSet):
 
 
 # -- Admin only -- #
-class PostAllView(viewsets.ModelViewSet):
+class PostAllView(BasePostCompiledView):
+    queryset = models.Post.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
+
+class PostAllRawView(viewsets.ModelViewSet):
     serializer_class = serializers.PostSerializer
     queryset = models.Post.objects.all()
     permission_classes = [permissions.IsAuthenticated]

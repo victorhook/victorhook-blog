@@ -9,4 +9,6 @@ urlpatterns = [
     path('images/', views.index),
     path('newpost/', views.index),
     path('post/<int:id>/', views.index),
+    path('post_all_raw/<int:id>/', views.index),
+    path('post_all_compiled/<int:id>/', views.index),
 ]
