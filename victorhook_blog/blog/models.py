@@ -26,7 +26,7 @@ class Tag(models.Model):
 
 class Image(models.Model):
     name = models.CharField(default='blog image', max_length=100)
-    image = models.ImageField(upload_to='')
+    image = models.ImageField(upload_to='post_images/')
 
     def __str__(self):
         return self.name

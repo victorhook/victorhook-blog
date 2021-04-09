@@ -34,7 +34,11 @@ const Homepage = () => {
         
             {
                 latestPost === null
-                ? <p>No previous blog posts</p>
+                ? <div className="d-flex justify-content-center">
+                    <p>No previous blog posts</p>                
+                </div>
+                
+
                 : <>
                     <div className="row last-post-title">
                         <h3 className="offset-3">Last post</h3>
