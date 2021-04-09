@@ -1,15 +1,11 @@
-"""
-WSGI config for victorhook_blog project.
-
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/3.1/howto/deployment/wsgi/
-"""
-
 import os
+import sys
 
 from django.core.wsgi import get_wsgi_application
+
+
+APP_PATH = '/home/victor/web/victorhook-blog'
+sys.path.append(APP_PATH)
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'victorhook_blog.settings')
 
