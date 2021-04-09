@@ -7,11 +7,12 @@
 - [X] Improve overall UI
 - [X] Fill content in About page
 - [X] Add links to github etc
-- [ ] Get domain name
-- [ ] Setup on remote machine
-- [ ] Create a CI/CD workflow.
+- [X] Get domain name
+- [X] Setup on remote machine
+- [X] Create a CI/CD workflow.
 - [ ] Make compiler create p-tags for normal text (currently empty).
-- [ ] 
+- [ ] Delete images
+- [ ]
 
 ## Extras
 - [ ] Import CSS in react
