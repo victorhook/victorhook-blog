@@ -68,7 +68,6 @@ input {
 .readable {
     font-family: 'Montserrat', sans-serif;
     color: rgb(71, 71, 71);
-    word-break: break-all;
     white-space: normal;
 }
 
@@ -82,6 +81,17 @@ input {
 footer a, 
 footer p {
     padding: 0 1em;
+}
+
+.bold {
+    font-weight: 600;
+}
+
+@media screen and (max-width: 430px) {
+    footer a,
+    footer p {
+        font-size: .8em;
+    }
 }
 
 /* Minutesread */
@@ -138,33 +148,70 @@ footer p {
     transform: rotateY(-10deg);
 }
 
-.post-card .post-title,
-.post-card .post-body,
-.post-card .post-date {
+.post-title,
+.post-body,
+.post-date {
     margin-left: 0;
     padding-left: 0;
 }
 
-.post-card .post-title {
+.post-title {
     font-size: 2em;
     font-weight: 700;
 }
 
-.post-card .post-body {
+.post-body {
     line-height: 2em;
     margin-top: 3em;
 }
 
 
+/* -- Tags -- */
+.tag-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tag-item {
+    display: inline-block;
+}
+
+.tag:first-of-type {
+    margin-left: 0;
+}
+
+.tag {
+    padding: .3em .5em;
+    border-radius: 5px;
+    background-color: #fcd1d1;
+    margin: .3em;
+    transition: 0.2s ease-in-out background-color;
+}
+
+.tag h6 {
+    margin: 0;
+}
+
+.tag:hover {
+    background-color: #c7a9a9 !important;
+}
+
+.post-card:hover .tag {
+    background-color: #fae8e8;
+}
+
+
+
 /* -- Front page -- */
 .homepage {
-    padding-top: 5em;
+    padding-top: 7em;
     position: relative;
 }
 
 .home-title {
     font-size: 2.5em;
-    padding-bottom: 2em;
+    padding-bottom: 3em;
     font-weight: 500;
     text-align: center;
     transform: scaleY(1.2);
@@ -179,7 +226,7 @@ footer p {
 .profile-pic {
     position: absolute;
     right: 5em;
-    top: 8em;
+    top: 10em;
 }
 
 .profile-pic img {
@@ -188,7 +235,7 @@ footer p {
 }
 
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1200px) {
     .home-title {
         font-size: 2em;
     }
@@ -209,6 +256,37 @@ footer p {
 
     .profile-pic img {
         width: 100px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .home-title {
+        font-size: 1em;
+        padding-bottom: 7em;
+    }
+    
+    .profile-pic {
+        right: 2em;
+    }
+
+    .profile-pic img {
+        width: 70px;
+    }
+
+    .post-title {
+        font-size: 1.3em;
+    }
+
+    .last-post-title {
+        margin: 1em 0;
+    }
+
+    .post-date,
+    .minutes-read {
+        font-size: .8em;
+    }
+    .tag h6 {
+        font-size: .7em;
     }
 }
 
@@ -239,21 +317,25 @@ footer p {
 /* -- Archive -- */
 
 .archive {
-    margin-top: 3em;
+    margin-top: 5em;
 }
 
-.archive ul {
-    list-style: none;
-}
-
-.archive li {
-    padding: 2em 0;
+.archive-title {
+    margin-bottom: 2em;
+    font-size: 2.5em;
 }
 
 .archive-post {
     padding: 2em;
     box-shadow: 0 1em 1em .05em rgb(150, 150, 150);
 }
+
+@media screen and (max-width: 500px) {
+    .archive-title {
+        font-size: 2em;
+    }
+}
+
 
 
 /* -- Post -- */
@@ -296,19 +378,12 @@ footer p {
     font-size: 3em;
     margin: 1em;
     margin: 0;
+    padding-bottom: 1em;
 }
 
-.blogpost hr {
-    margin-bottom: 100px;
-}
-
-.blogpost-date {
-    position: absolute;
-    bottom: 0;
-    right: 1em;
-}
 
 .blogpost-body {
+    margin-top: 5em;
     font-size: 1.3em;
     letter-spacing: .1em;
     line-height: 2em;
@@ -326,7 +401,21 @@ footer p {
     font-weight: 700;
 }
 
+.blogpost-tag-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 
+.blogpost-tag-list li:first-of-type,
+.blogpost-date {
+    padding: 0;
+}
+
+.blogpost-tag-list li {
+    display: inline-block;
+    padding: 0 .5em;
+}
 
 @media screen and (max-width: 1100px) {
 
@@ -359,6 +448,16 @@ footer p {
 
 .about .break {
     padding: 1em;
+}
+
+@media screen and (max-width: 500px) {
+    .about .about-title {
+        font-size: 2em;
+    }
+
+    .about p {
+        font-size: 1em;
+    }
 }
 
 
@@ -466,3 +565,4 @@ footer p {
     background-color: rgb(230, 230, 230);
     cursor: pointer;
 }
+

@@ -8,8 +8,8 @@ const MinutesRead = ({ post }) => {
 
     return (
         <div className="minutes-read d-flex">
-            <Book className="book"/>
-            <h6>{Utils.getReadMinutes(words)} minutes read</h6>
+            <Book className="book minutes-read"/>
+            <h6 className="minutes-read">{Utils.getReadMinutes(words)} minutes read</h6>
         </div>
     )
 }

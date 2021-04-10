@@ -12,6 +12,7 @@ const Post = () => {
     const title = React.useRef();
     const date = React.useRef();
     const body = React.useRef();
+    const taglist = React.useRef();
 
     const ENDPOINT = '/api/post';
 
@@ -31,9 +32,24 @@ const Post = () => {
                 title.current.innerHTML = post.title;
                 body.current.innerHTML = post.body;
                 date.current.innerHTML = post.timestamp.split('T')[0];
-                console.log(post.timestamp);
+
+                applyTagsOfPost({id: id});
             });
     };
+
+    const applyTagsOfPost = post => {
+        fetch('/api/tag')
+            .then(res => res.json())
+            .then(tags => {
+                tags = tags.filter(tag => tag.post == post.id)
+                
+                for (let tag of tags) {
+                    let newTag = document.createElement('li');
+                    newTag.innerHTML = tag.name;
+                    taglist.current.appendChild(newTag);
+                }
+        })
+    }
 
     React.useEffect(() => {
         getPost();
@@ -46,11 +62,28 @@ const Post = () => {
             <div className="row">
                 <div className="offset-0 col-12 offset-sm-1 col-sm-10 offset-xl-3 col-xl-6">
 
-                    <div className="blogpost-header readable">
-                        <h3 className="blogpost-title"
-                            ref={title}>
-                        </h3>
-                        <h6 className="blogpost-date">Posted: <span ref={date}></span></h6>
+                    <h3 className="blogpost-title"
+                        ref={title}>
+                    </h3>
+
+
+                    <div className="row">
+                        <h6 className="col-4 col-sm-3 bold">
+                            Posted:
+                        </h6>
+
+                        <span className="col-8 col-sm-9 blogpost-date" ref={date}>
+                            
+                        </span>
+                    </div>
+
+                    <div className="row">
+                        <h6 className="col-4 col-sm-3 bold">
+                        Categories:
+                        </h6>
+
+                        <ul className="blogpost-tag-list col-8 col-sm-9" ref={taglist}>
+                        </ul>
                     </div>
 
                     <hr />

@@ -19,7 +19,7 @@ const Aboutpage = () => {
                     <br />
                     <br />
                     If you have thoughts on anything or just want to contact me,
-                    don't hesitate: <a href="#">contact me</a>
+                    don't hesitate: <a href="https://mrhookv.com/contact">contact me</a>
                 </p>
             </div>
         </div>

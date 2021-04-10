@@ -51,7 +51,7 @@ const PostCard = ({ post, isAdmin }) => {
                     <ul className="tag-list">
                         {
                             post.tags.map(tag => 
-                                <li className="tag-item">
+                                <li className="tag-item" key={tag.id}>
                                     <Tag tag={tag}/>
                                 </li>
                             )
