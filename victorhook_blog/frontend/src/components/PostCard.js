@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Utils from '../utils';
 import MinutesRead from './MinutesRead';
+import Tag from './Tag';
 
 
 const MAX_CHARS = 300;
@@ -40,12 +41,22 @@ const PostCard = ({ post, isAdmin }) => {
                     <div className="post-top d-flex justify-content-between">
                         <h3 className="post-title">{ post.title }</h3>
 
-                        <div>
+                        <div className="post-header">
                             <h6 className="post-date">Posted: { date }</h6>
                             <MinutesRead post={post}/>
                         </div>
 
                     </div>
+
+                    <ul className="tag-list">
+                        {
+                            post.tags.map(tag => 
+                                <li className="tag-item">
+                                    <Tag tag={tag}/>
+                                </li>
+                            )
+                        }
+                    </ul>
 
                     <div className="post-body readable"
                          ref={bodyRef}></div>

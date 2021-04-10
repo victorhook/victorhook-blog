@@ -1,4 +1,5 @@
 import React from 'react'
+import Utils from '../utils';
 
 import PostCard from './PostCard';
 
@@ -12,11 +13,25 @@ const Homepage = () => {
             .then(res => res.json())
             .then(posts => {
                 if (posts.length > 0) {
-                    setLatestPost(posts.slice(-1)[0]);
+                    let post = posts.slice(-1)[0];
+                    post.tags = [];
+                    setLatestPost(post);
+                    getTagsOfPost(post);
                 } else {
                     setLatestPost(null);
                 } 
             })
+    }
+
+    const getTagsOfPost = post => {
+        fetch('/api/tag')
+            .then(res => res.json())
+            .then(tags => {
+                let thisPostsTags = tags.filter(tag => tag.post == post.id);
+                let postCopy = Object.assign({}, post);
+                postCopy.tags = thisPostsTags;
+                setLatestPost(postCopy);
+        })
     }
 
     React.useEffect(() => getLatestPost(), []);
@@ -39,17 +54,13 @@ const Homepage = () => {
                 </div>
                 
 
-                : <>
-                    <div className="row last-post-title">
-                        <h3 className="offset-3">Last post</h3>
+                : 
+                <div class="row">
+                    <div class="offset-0 col-12 offset-sm-1 col-sm-10 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+                        <h3 className="last-post-title">Last post</h3>
+                        <PostCard post={latestPost} />
                     </div>
-                    
-                    <div class="row">
-                        <div class="offset-0 col-12 offset-sm-1 col-sm-10 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-                            <PostCard post={latestPost} />
-                        </div>
-                    </div>
-                </>
+                </div>
             }
 
         </div>
