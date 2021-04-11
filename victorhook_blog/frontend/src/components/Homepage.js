@@ -40,7 +40,7 @@ const Homepage = () => {
         <div className="homepage container-fluid">
 
             <div className="row">
-                <h3 className="home-title">some thoughts from Victor Krook</h3>
+                <h3 className="home-title">Some thoughts from Victor Krook</h3>
             </div>
 
             <div className="profile-pic">

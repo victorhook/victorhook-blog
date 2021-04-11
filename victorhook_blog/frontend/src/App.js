@@ -24,25 +24,26 @@ const App = () => {
           {path: '/about/', text: 'about'},
         ]}/>
 
-        <Switch>
+        <div className="content">
+          <Switch>
+              <Route path="/about/">
+                <Aboutpage />
+              </Route>
 
-          <Route path="/about/">
-            <Aboutpage />
-          </Route>
+              <Route path="/archive/">
+                <Archive />
+              </Route>
 
-          <Route path="/archive/">
-            <Archive />
-          </Route>
+              <Route path="/post/:id/">
+                <Post />
+              </Route>
 
-          <Route path="/post/:id/">
-            <Post />
-          </Route>
+              <Route path="/">
+                <Homepage />
+              </Route>
+          </Switch>
+        </div>
 
-          <Route path="/">
-            <Homepage />
-          </Route>
-
-        </Switch>
 
       </div>
     </Router>

@@ -88,9 +88,8 @@ const Post = () => {
 
                     <hr />
 
-                    <div className="blogpost-body"
+                    <div className="blogpost-body readable"
                          ref={body}>
-
                     </div>
                 </div>
             </div>
