@@ -7,7 +7,6 @@ DIR="$( dirname "${BASH_SOURCE[0]}" )"
 # Paths
 TARGET=${USER}@${REMOTE}
 REPO_PATH=${REMOTE_PATH}/${REPO_NAME}
-PY_PATH="${REPO_PATH}/${APP_NAME}"
 APP_PATH="${REPO_PATH}/${APP_NAME}"
 
 
@@ -19,8 +18,10 @@ echo ${PASS} | ssh -tt ${TARGET} "\
 sudo apt update \
 && cd ${APP_PATH} \
 && git pull \
+&& cd ${REPO_PATH} \
 && source env/bin/activate \
-&& cd ${PY_PATH} \
+&& cd ${APP_PATH} \
+&& pwd \\
 && python3 manage.py collectstatic --no-input
 "
 
