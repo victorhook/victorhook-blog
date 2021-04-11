@@ -34,38 +34,41 @@ const AdminApp = () => {
             {path: '/about/', text: 'about'},
           ]}/>
   
-          <Switch>
 
-            <Route path="/images">
-              <Imagepage />
-            </Route>
+          <div className="content">
+            <Switch>
 
-            <Route path="/newpost">
-              <NewPost />
-            </Route>
-  
-            <Route path="/about/">
-                <Aboutpage />
-            </Route>
+              <Route path="/images">
+                <Imagepage />
+              </Route>
 
-            <Route path="/archive/">
-                <Archive isAdmin={true}/>
-            </Route>
+              <Route path="/newpost">
+                <NewPost />
+              </Route>
 
-            <Route path="/post_all_raw/:id/">
-                <EditPost />
-            </Route>
+              <Route path="/about/">
+                  <Aboutpage />
+              </Route>
 
-            <Route path="/post/:id/">
-                <Post />
-            </Route>
+              <Route path="/archive/">
+                  <Archive isAdmin={true}/>
+              </Route>
 
-            <Route path="/">
-              <Homepage isAdmin={true}/>
-            </Route>
-  
-          </Switch>
-  
+              <Route path="/post_all_raw/:id/">
+                  <EditPost />
+              </Route>
+
+              <Route path="/post/:id/">
+                  <Post />
+              </Route>
+
+              <Route path="/">
+                <Homepage isAdmin={true}/>
+              </Route>
+
+            </Switch>
+          </div>
+
         </div>
       </Router>
     )
