@@ -16,7 +16,7 @@ const BlogPost = ({ post }) => {
 
             <ul className="blogpost-info">
                 <li>{ post.date }</li>
-                <li> <Book /> { Utils.getReadMinutes(post.body.length) } min</li>
+                <li> <Book /> { Utils.getReadMinutes(post.body.split(' ').length) } min</li>
                 {
                     post.tags.map(tag => 
                         <li className="blogpost-tag" key={tag.id}>{tag.name}</li>
