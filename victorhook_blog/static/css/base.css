@@ -91,6 +91,21 @@ footer p {
     font-weight: 600;
 }
 
+.icon {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 0;
+}
+
+.link {
+    transition: 0.3s ease-in-out color;
+}
+
+.link:hover  {
+    color:rgb(105, 105, 105)
+}
+
 @media screen and (max-width: 430px) {
     footer a,
     footer p {
@@ -383,7 +398,7 @@ footer p {
 
 
 .blogpost-body {
-    margin-top: 5em;
+    margin-top: 3em;
     font-size: 1.3em;
     letter-spacing: .1em;
     line-height: 2em;
@@ -401,21 +416,29 @@ footer p {
     font-weight: 700;
 }
 
-.blogpost-tag-list {
+.blogpost-info,
+.blogpost-taglist {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.blogpost-tag-list li:first-of-type,
-.blogpost-date {
-    padding: 0;
+.blogpost-info li {
+    display: inline-block;
+    padding: 0 1em;
+    color:rgb(94, 94, 94)
 }
 
-.blogpost-tag-list li {
-    display: inline-block;
-    padding: 0 .5em;
+.blogpost .post-public {
+    color: rgb(49, 182, 49)
 }
+
+.blogpost .post-not-public {
+    color: rgb(241, 50, 50);
+}
+
+
+
 
 @media screen and (max-width: 1100px) {
 
@@ -437,13 +460,6 @@ footer p {
     margin-bottom: 2em;
     font-size: 2.5em;
     text-align: center;
-}
-
-.about .icon {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    top: 0;
 }
 
 .about .lightbulb {
@@ -543,7 +559,6 @@ footer p {
 /* -- Edit post -- */
 
 .edit-post-content {
-    padding-top: 2em;
     font-size: 1.1em;
 }
 
@@ -561,11 +576,16 @@ footer p {
 .edit-post-content input,
 .edit-post-content textarea {
     margin: 1em 0;
-    padding: 1em;
+    font-size: 1.2em;
+    padding: .5em 1.5em;
 }
 
 .edit-post-content input {
     width: 50%;
+}
+
+.no-post {
+    text-align: center;
 }
 
 /* Images */

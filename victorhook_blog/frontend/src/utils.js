@@ -19,6 +19,10 @@ class Utils {
         return cookieValue;
     }
 
+    static getDate(post) {
+        return post.timestamp.split('T')[0];
+    }
+
     static createCsrfToken() {
         const element = document.createElement('input');
         element.hidden = true;
@@ -30,7 +34,7 @@ class Utils {
     static getReadMinutes(words) {
         // WPM taken from https://en.wikipedia.org/wiki/Words_per_minute
         const WORDS_PER_MINUTE = 180;
-        const minutes = Math.round(words / 180);
+        const minutes = Math.round(words / WORDS_PER_MINUTE);
         return minutes === 0 ? 1 : minutes;
     }
 

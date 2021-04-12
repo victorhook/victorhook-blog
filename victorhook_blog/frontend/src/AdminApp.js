@@ -18,14 +18,13 @@ import Imagepage from './components/Adminpage/Imagepage';
 import NewPost from './components/Adminpage/NewPost';
 import EditPost from './components/Adminpage/EditPost';
 
-
+ 
 const AdminApp = () => {
 
     const createPost = () => {};
 
     return (
         <Router>
-        <div>
   
           <Navbar links={[
             {path: '/newpost/', text: 'new post'},
@@ -47,19 +46,23 @@ const AdminApp = () => {
               </Route>
 
               <Route path="/about/">
-                  <Aboutpage />
-              </Route>
-
-              <Route path="/archive/">
-                  <Archive isAdmin={true}/>
+                <Aboutpage />
               </Route>
 
               <Route path="/post_all_raw/:id/">
-                  <EditPost />
+                <EditPost />
               </Route>
 
               <Route path="/post/:id/">
-                  <Post />
+                <Post />
+              </Route>
+
+              <Route path="/archive/">
+                <Archive isAdmin={true}/>
+              </Route>
+
+              <Route path="/post_all/:id/">
+                <Post isAdmin={true}/>
               </Route>
 
               <Route path="/">
@@ -67,7 +70,6 @@ const AdminApp = () => {
               </Route>
 
             </Switch>
-          </div>
 
         </div>
       </Router>

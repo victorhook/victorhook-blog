@@ -1,20 +1,27 @@
 import React from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
-import MinutesRead from './MinutesRead';
+import BlogPost from './BlogPost';
+import Utils from '../utils';
 
 
 /* This component will be visible for the public and displays a post. */
-const Post = () => {
+const Post = ({ isAdmin }) => {
+
+    const [noPost, setNoPost] = React.useState(false);
+    const [post, setPost] = React.useState({
+        id: -1,
+        public: false,
+        title: '',
+        date: '',
+        body: '',
+        tags: []
+    })
 
     const params = useParams();
     const id = params.id;
-    const title = React.useRef();
-    const date = React.useRef();
-    const body = React.useRef();
-    const taglist = React.useRef();
 
-    const ENDPOINT = '/api/post';
+    const ENDPOINT = isAdmin ? '/api/post_all' : '/api/post';
 
     const getPost = () => {
         fetch(`${ENDPOINT}/${id}`)
@@ -25,15 +32,13 @@ const Post = () => {
                     post.body === undefined ||
                     post.public === undefined)
                 {
-                    console.log(`Failed to read post ${id}, got: ${post}`);
+                    console.log(`Failed to read post ${id}, got: ${JSON.stringify(post)}`);
+                    setNoPost(true);
                     return;
                 }
 
-                title.current.innerHTML = post.title;
-                body.current.innerHTML = post.body;
-                date.current.innerHTML = post.timestamp.split('T')[0];
-
-                applyTagsOfPost({id: id});
+                post.date = Utils.getDate(post);
+                applyTagsOfPost(post);
             });
     };
 
@@ -41,14 +46,9 @@ const Post = () => {
         fetch('/api/tag')
             .then(res => res.json())
             .then(tags => {
-                tags = tags.filter(tag => tag.post == post.id)
-                
-                for (let tag of tags) {
-                    let newTag = document.createElement('li');
-                    newTag.innerHTML = tag.name;
-                    taglist.current.appendChild(newTag);
-                }
-        })
+                post.tags = tags.filter(tag => tag.post == post.id);
+                setPost(post);
+            })
     }
 
     React.useEffect(() => {
@@ -62,35 +62,36 @@ const Post = () => {
             <div className="row">
                 <div className="offset-0 col-12 offset-sm-1 col-sm-10 offset-xl-3 col-xl-6">
 
-                    <h3 className="blogpost-title"
-                        ref={title}>
-                    </h3>
+                    {
+                        noPost 
+                        ? 
+                        <div className="no-post">
+                            <p>
+                                This post was not found.
+                            </p>
 
-
-                    <div className="row">
-                        <h6 className="col-4 col-sm-3 bold">
-                            Posted:
-                        </h6>
-
-                        <span className="col-8 col-sm-9 blogpost-date" ref={date}>
-                            
-                        </span>
-                    </div>
-
-                    <div className="row">
-                        <h6 className="col-4 col-sm-3 bold">
-                        Categories:
-                        </h6>
-
-                        <ul className="blogpost-tag-list col-8 col-sm-9" ref={taglist}>
-                        </ul>
-                    </div>
-
-                    <hr />
-
-                    <div className="blogpost-body readable"
-                         ref={body}>
-                    </div>
+                            <Link to="/archive" className="link">Go to archive</Link>
+                        </div>
+                        : 
+                        <>
+                            {
+                                isAdmin &&
+                                <div className="admin-header d-flex justify-content-between">
+                                    {
+                                        post.public
+                                        ? <p className="post-public">Public</p>
+                                        : <p className="post-not-public">Not public</p>
+                                    }
+                                    <Link to={`/post_all_raw/${post.id}`} 
+                                          className="link">
+                                        Edit
+                                    </Link>
+                                </div>
+                            }
+                            <BlogPost post={post}/>
+                        </>
+                    }
+                    
                 </div>
             </div>
 

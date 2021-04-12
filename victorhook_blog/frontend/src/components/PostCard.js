@@ -20,7 +20,7 @@ const PostCard = ({ post, isAdmin }) => {
     const bodyRef = React.useRef();
 
     // If we're admin, we want to go to edit post, otherwise just view it.
-    const ENDPOINT = isAdmin ? 'post_all_raw' : 'post';
+    let ENDPOINT = isAdmin ? 'post_all' : 'post';
 
     React.useEffect(() => {
         bodyRef.current.innerHTML = body;

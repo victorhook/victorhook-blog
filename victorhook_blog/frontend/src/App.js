@@ -17,7 +17,6 @@ const App = () => {
 
   return (
     <Router>
-      <div>
 
         <Navbar links={[
           {path: '/archive/', text: 'archive'},
@@ -42,8 +41,6 @@ const App = () => {
                 <Homepage />
               </Route>
           </Switch>
-        </div>
-
 
       </div>
     </Router>

@@ -1,11 +1,13 @@
 import React from 'react'
-import { useParams } from 'react-router-dom';
+import { Switch, useParams } from 'react-router-dom';
 
 import Toggler from '../Toggler';
 import Utils from '../../utils';
 import Tags from './Tags';
 import ImageContainer from './ImageContainer';
 
+
+import { Link } from "react-router-dom";
 
 const IMG_ENDPOINT = '/api/image';
 const ENDPOINT = '/api/post_all_raw';
@@ -187,29 +189,39 @@ const EditPost = () => {
                                     toggleAlert={toggleAlert}/>
                     </li>
 
+                    <li>
+                        <Link to={`/post_all/${id}`}>Preview</Link>
+                    </li>
+
                 </ul>
 
 
             </div>
 
-            <div className="d-flex w-75 m-auto flex-column edit-post-content">
+            <div className="row">
+                <div className="offset-2 col-10 offset-lg-3 col-lg-6">
 
-                <label>Title</label>
-                <input type="text" 
-                        className="edit-title readable" 
-                        ref={title}/>
+                    <div className="d-flex w-100 m-auto flex-column edit-post-content">
 
-                <label>Date</label>
-                <input type="date"
-                        className="edit-date readable"
-                        ref={date}/>
+                        <label>Title</label>
+                        <input type="text" 
+                                className="edit-title readable" 
+                                ref={title}/>
 
-                <label>Body</label>
-                <textarea rows="30"
-                            className="edit-body readable"
-                            ref={body}></textarea>
+                        <label>Date</label>
+                        <input type="date"
+                                className="edit-date readable"
+                                ref={date}/>
 
+                        <label>Body</label>
+                        <textarea rows="30"
+                                    className="edit-body readable"
+                                    ref={body}></textarea>
+
+                    </div>
+                </div>
             </div>
+
 
         </div>
     )

@@ -20,7 +20,7 @@ const ImageContainer = ({ images, toggleAlert, className }) => {
     return (
         <div className={className}>
             <div className="dropdown">
-                <a className="btn btn-secondary dropdown-toggle" role="button" id="postImageMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                <a className="button dropdown-toggle" role="button" id="postImageMenu" data-bs-toggle="dropdown" aria-expanded="false">
                 Images
                 </a>
 

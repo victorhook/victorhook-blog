@@ -41,7 +41,7 @@ const Archive = ({ isAdmin }) => {
                 <div className="row">
                     <div className="offset-0 col-12 offset-sm-1 col-sm-10 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6 pt-4">                        
                         <PostCard post={post}
-                                    isAdmin={isAdmin}
+                                  isAdmin={isAdmin}
                         />
                     </div>
                 </div>

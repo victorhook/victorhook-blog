@@ -87,7 +87,7 @@ const Tags = ({ postId, toggleAlert, className }) => {
 
             <li>
                 <div className="dropdown">
-                    <a className="btn btn-secondary dropdown-toggle" href="#" role="button" id="postTagsMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a className="button dropdown-toggle" href="#" role="button" id="postTagsMenu" data-bs-toggle="dropdown" aria-expanded="false">
                     All tags
                     </a>
 
@@ -105,7 +105,7 @@ const Tags = ({ postId, toggleAlert, className }) => {
 
             <li>
                 <div className="dropdown">
-                    <a className="btn btn-secondary dropdown-toggle" href="#" role="button" id="postTagsMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a className="button dropdown-toggle" href="#" role="button" id="postTagsMenu" data-bs-toggle="dropdown" aria-expanded="false">
                         Post tags
                     </a>
 
