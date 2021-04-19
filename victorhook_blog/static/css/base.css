@@ -437,7 +437,31 @@ footer p {
     color: rgb(241, 50, 50);
 }
 
+/* Styling classes */
+.headers {
+    color: black;
+}
+.blogpost-image {
 
+}
+
+.blogpost-link {
+    color: black;
+    transition: 0.3s ease-in-out color;
+}
+.blogpost-link:hover {
+    color:rgb(82, 82, 82);
+}
+
+.bold {
+    font-weight: 600;
+}
+.italic {
+    font-style: italic;
+}
+.quote {
+    font-style: italic;
+}
 
 
 @media screen and (max-width: 1100px) {
