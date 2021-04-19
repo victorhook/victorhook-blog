@@ -5,14 +5,18 @@ from . import tag_classnames
 
 
 class Regexes:
-    H1 = re.compile('(#)(.*)')
-    H2 = re.compile('(##)(.*)')
-    H3 = re.compile('(###)(.*)')
-    H4 = re.compile('(####)(.*)')
-    P = re.compile('\n(.*)\n')
-    LINK = re.compile(r'(\[(.*)\])(\((.*)\))')
-    IMAGE = re.compile(r'(!\[(.*)\])(\((.*)\))')
-    LineBreak = re.compile('\n\n')
+    h1 = re.compile('(#)(.*)')
+    h2 = re.compile('(##)(.*)')
+    h3 = re.compile('(###)(.*)')
+    h4 = re.compile('(####)(.*)')
+    link = re.compile(r'(\[(.*)\])(\((.*)\))')
+    image = re.compile(r'(!\[(.*)\])(\((.*)\))')
+    linebreak = re.compile('\n\n')
+    italic = re.compile('(\*)(.*?)(\*)')
+    bold = re.compile('(\*\*)(.*?)(\*\*)')
+    quote = re.compile('(")(.*?)(")')
+    line = re.compile('(---)')
+    not_body_tags = re.compile(r'(<h[1-4])|(<img)')
 
 
 class Node:
@@ -32,7 +36,7 @@ class Node:
     # List of classnames that should be added to the tag.
     classes: list = []
 
-    # Amount of repetitions for the tag. Useful for linebreaks etc.
+    # Amount of repetitions for the tag. Useful for LINE_BREAKs etc.
     repeat_tag = 1
 
     # -- Default methods which can be overwritten by child. -- #
@@ -45,6 +49,11 @@ class Node:
     def get_params(cls, match: tuple) -> dict:
         # The indexes of the match corresponds to the regex groups.
         return dict()
+
+    @classmethod
+    def get_id(cls, match: tuple) -> str:
+        # Having id is optional. It can be used for referencing, headers etc.
+        return None
 
     @classmethod
     def get_content(cls, match: tuple) -> str:
@@ -61,9 +70,13 @@ class Node:
             replaced by.
         """
         # Set params and content before we build the string
-
         content = cls.get_content(match)
         params = cls.get_params(match)
+
+        # Add id if we have one.
+        id = cls.get_id(match)
+        if id is not None:
+            params['id'] = id.replace(' ', '_')
 
         # Build initial tag
         html = f'<{cls.html_tag}'
@@ -89,7 +102,11 @@ class Node:
 
 class Header(Node):
     """ Base class for all header tags. """
-    classes = tag_classnames.HEADERS
+    classes = tag_classnames.headers
+
+    @classmethod
+    def get_id(cls, match: tuple) -> str:
+        return match[1]
 
     @classmethod
     def get_content(cls, match: tuple) -> str:
@@ -97,38 +114,29 @@ class Header(Node):
 
 
 class H4(Header):
-    regex: re.Pattern = Regexes.H4
+    regex: re.Pattern = Regexes.h4
     html_tag: str = 'h4'
 
 
 class H3(Header):
-    regex: re.Pattern = Regexes.H3
+    regex: re.Pattern = Regexes.h3
     html_tag: str = 'h3'
 
 
 class H2(Header):
-    regex: re.Pattern = Regexes.H2
+    regex: re.Pattern = Regexes.h2
     html_tag: str = 'h2'
 
 
 class H1(Header):
-    regex: re.Pattern = Regexes.H1
+    regex: re.Pattern = Regexes.h1
     html_tag: str = 'h1'
 
 
-class P(Node):
-    regex: re.Pattern = Regexes.P
-    html_tag: str = 'p'
-    
-    @classmethod
-    def get_string_to_replace(cls, match: tuple) -> str:
-        print(f'p ---> {match}')
-        return match[1]
-
 class Img(Node):
-    regex: re.Pattern = Regexes.IMAGE
+    regex: re.Pattern = Regexes.image
     html_tag: str = 'img'
-    classes = tag_classnames.IMG
+    classes = tag_classnames.image
 
     @classmethod
     def get_string_to_replace(cls, match: tuple) -> str:
@@ -143,9 +151,9 @@ class Img(Node):
 
 
 class Link(Node):
-    regex: re.Pattern = Regexes.LINK
+    regex: re.Pattern = Regexes.link
     html_tag: str = 'a'
-    classes = tag_classnames.LINK
+    classes = tag_classnames.link
 
     @classmethod
     def get_string_to_replace(cls, match: tuple) -> str:
@@ -160,19 +168,58 @@ class Link(Node):
         return match[3]
 
 
+class TextStyle(Node):
+    """ Base class for simple text-decorations, like ITALIC, Bold, Quotes etc. 
+    """
+    html_tag: str = 'span'
+
+    @classmethod
+    def get_content(cls, match: tuple) -> str:
+        return match[1]
+
+
+class Italic(TextStyle):
+    regex: re.Pattern = Regexes.italic
+    classes = tag_classnames.italic
+
+
+class Bold(TextStyle):
+    regex: re.Pattern = Regexes.bold
+    classes = tag_classnames.bold
+
+
+class Quote(TextStyle):
+    regex: re.Pattern = Regexes.quote
+    classes = tag_classnames.quote
+    html_tag = 'q'
+
+
 class LineBreak(Node):
-    regex: re.Pattern = Regexes.LineBreak
+    regex: re.Pattern = Regexes.linebreak
     html_tag: str = 'br'
-    classes = tag_classnames.LINEBREAK
+    classes = tag_classnames.linebreak
     repeat_tag: int = 2
 
 
+class Line(Node):
+    html_tag: str = 'hr'
+    regex: re.Pattern = Regexes.line
+    classes = tag_classnames.line
+
+
+"""
+    Note! The order of the node matters, since the string is
+    successively parsed AND changed.
+"""
 NODE_CLASSES = [
+    Quote,
+    Bold,
+    Italic,
     H4,
     H3,
     H2,
     H1,
     Img,
     Link,
-    LineBreak,
+    Line
 ]
