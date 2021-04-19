@@ -4,8 +4,26 @@ import { Book } from 'react-bootstrap-icons';
 
 import MinutesRead from './MinutesRead';
 
+const copyTag = () => {
+    const tag = document.createElement('span');
+    tag.innerHTML = "COPY";
+    return tag;
+}
 
 const BlogPost = ({ post }) => {
+
+    const body = React.useRef();
+
+    React.useEffect(() => {
+        for (let child of body.current.children) {
+            console.log(child);
+            child.appendChild(copyTag);
+            child.addEventListener('click', () => {
+                console.log(child);
+                child.scrollIntoView();
+            })
+        }
+    }, [post]);
 
     return (
         <div className="blogpost-content">
@@ -26,8 +44,10 @@ const BlogPost = ({ post }) => {
 
             <hr />
 
-            <div className="blogpost-body readable">
-                { post.body }
+            <div className="blogpost-body readable" ref={body}
+            dangerouslySetInnerHTML={{
+                __html: post.body
+            }}>
             </div>
         </div>
 
